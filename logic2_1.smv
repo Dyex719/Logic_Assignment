@@ -1,0 +1,31 @@
+MODULE main
+VAR
+  location : {s0,s1,s2};
+  p : boolean;
+  q : boolean;
+  r : boolean;
+ASSIGN
+  init(location) := s0;
+  init(p) := TRUE;
+  init(q) := TRUE;
+  init(r) := FALSE;
+  next(location) := case
+                    location=s0 : {s1,s2};
+                    location=s1 : {s0,s2};
+                    location=s2 : s2;
+                    esac;
+  next(p) := case
+             next(location)=s0: TRUE;
+             next(location)=s1: FALSE;
+             next(location)=s2: FALSE;
+             esac;
+  next(q) := case
+             next(location)=s0: TRUE;
+             next(location)=s1: TRUE;
+             next(location)=s2: FALSE;
+             esac;
+  next(r) := case
+             next(location)=s0: FALSE;
+             next(location)=s1: TRUE;
+             next(location)=s2: TRUE;
+             esac;
